@@ -17,7 +17,7 @@ export class UniqueUsername implements AsyncValidator{
             }),
             catchError((err) => {
                 if(err.error.username){
-                    return  of({ nonUniqurUsername: true});
+                    return  of({ nonUniqueUsername: true});
                 } else {
                     return of({ noConnection: true});
                 }
