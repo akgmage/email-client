@@ -4,6 +4,7 @@
         <label>Username</label>
         <input formControlName="username" />
     </div>
+    <app-input label="Username" [control]="$any(authForm.get('username'))"></app-input>
     {{ authForm.get('username')?.errors | json}}
     <div class="field">
         <label>Password</label>
