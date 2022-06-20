@@ -3,6 +3,14 @@ import { HttpClient } from '@angular/common/http';
 interface UsernameAvailableResponse {
   available: boolean;
 }
+interface SignupCredentials {
+  username: string;
+  password: string;
+  passwordConfirmation: string;
+}
+interface SignupResponse {
+  username: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +24,8 @@ export class AuthService {
       username: username
   });
   }
-  signup(credentials: any) {
-    return this.http.post<any>(
+  signup(credentials: SignupCredentials) {
+    return this.http.post<SignupResponse>(
       `${this.rootUrl}/auth/username`,
       credentials
     );
