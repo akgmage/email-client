@@ -39,7 +39,7 @@ export class AuthService {
         })
     );
   }
-
+// By default the HttpClient is going to ignore the cookies unless we add in options object of withCredentials: true
   checkAuth() {
     return this.http.get(`${this.rootUrl}/auth/signedin`, {
       withCredentials: true
