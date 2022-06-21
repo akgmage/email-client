@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
 interface UsernameAvailableResponse {
   available: boolean;
@@ -29,7 +29,7 @@ export class AuthService {
   }
   signup(credentials: SignupCredentials) {
     return this.http.post<SignupResponse>(
-      `${this.rootUrl}/auth/username`,
+      `${this.rootUrl}/auth/signup`,
       credentials
     ).pipe(
         tap(() => {
@@ -37,4 +37,14 @@ export class AuthService {
         })
     );
   }
+
+  checkAuth() {
+    return this.http.get(`${this.rootUrl}/auth/signedin`)
+      .pipe(
+        tap(response => {
+          console.log(response);
+        })
+      );
+  }
+
 }
