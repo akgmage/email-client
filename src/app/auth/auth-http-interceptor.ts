@@ -12,6 +12,7 @@ export class AuthHttpInterceptor implements HttpInterceptor{
         req: HttpRequest<any>, 
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-
+        console.log(req);
+        return next.handle(req);
     }
 }
