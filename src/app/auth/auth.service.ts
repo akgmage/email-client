@@ -13,6 +13,10 @@ interface SignupCredentials {
 interface SignupResponse {
   username: string;
 }
+interface SignedinResponse {
+  authenticated: boolean;
+  username: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -39,10 +43,10 @@ export class AuthService {
   }
 // By default the HttpClient is going to ignore the cookies unless we add in options object of withCredentials: true
   checkAuth() {
-    return this.http.get(`${this.rootUrl}/auth/signedin`)
+    return this.http.get<SignedinResponse>(`${this.rootUrl}/auth/signedin`)
       .pipe(
-        tap(response => {
-          console.log(response);
+        tap( ({ authenticated }) => {
+          this.signedin$.next(authenticated);
         })
       );
   }
